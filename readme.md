@@ -1,3 +1,4 @@
+Paste this to [zerops.io](https://app.zerops.io) as import services yml:
 ```yaml
 services:
   - hostname: lifeline
