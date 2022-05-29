@@ -1,4 +1,11 @@
-Paste this to [zerops.io](https://app.zerops.io) as import services yml:
+# Lifeline
+
+Create your own life timeline using Timeline.js and fetching data from Google Sheets.
+
+# How to run?
+
+Paste following to [zerops.io](https://app.zerops.io) as import services yml:
+
 ```yaml
 services:
   - hostname: lifeline

@@ -181,10 +181,7 @@ func fetch(ctx context.Context) (Timeline, error) {
 
 	var t Timeline
 
-	events, err := srv.Spreadsheets.Values.Get(
-		os.Getenv("SPREADSHEET_ID"),
-		"events!A2:E",
-	).Do()
+	events, err := srv.Spreadsheets.Values.Get(os.Getenv("SPREADSHEET_ID"), "events!A2:E").Do()
 	if err != nil {
 		return Timeline{}, err
 	}
@@ -219,10 +216,12 @@ func fetch(ctx context.Context) (Timeline, error) {
 		} else {
 			return Timeline{}, fmt.Errorf("line %d: title missing or corrupt", lineIndex)
 		}
-		if description, ok := line[fieldDescription].(string); ok && description != "" {
-			e.Text.Description = &description
+		if len(line) >= 4 {
+			if description, ok := line[fieldDescription].(string); ok && description != "" {
+				e.Text.Description = &description
+			}
 		}
-		if len(line) == 5 {
+		if len(line) >= 5 {
 			if group, ok := line[fieldGroup].(string); ok && group != "" {
 				e.Group = &group
 			}
@@ -230,10 +229,7 @@ func fetch(ctx context.Context) (Timeline, error) {
 		t.Events = append(t.Events, e)
 	}
 
-	eras, err := srv.Spreadsheets.Values.Get(
-		os.Getenv("SPREADSHEET_ID"),
-		"eras!A2:C",
-	).Do()
+	eras, err := srv.Spreadsheets.Values.Get(os.Getenv("SPREADSHEET_ID"), "eras!A2:C").Do()
 	if err != nil {
 		return Timeline{}, err
 	}
