@@ -7,6 +7,7 @@ services:
     envVariables:
       GOOGLE_JSON_CREDENTIALS: |-
         <your-service-account-credentials-json-content>
+      SPREADSHEET_ID: <your-spreadsheet-id>
     buildFromGit: https://github.com/tikinang/lifeline
     enableSubdomainAccess: true
     minContainers: 1

@@ -182,7 +182,7 @@ func fetch(ctx context.Context) (Timeline, error) {
 	var t Timeline
 
 	events, err := srv.Spreadsheets.Values.Get(
-		"1DZn7t_IUv-voWdRwPwOKtu7tsJAw4wVjG2bKVA7skQQ",
+		os.Getenv("SPREADSHEET_ID"),
 		"events!A2:E",
 	).Do()
 	if err != nil {
@@ -231,7 +231,7 @@ func fetch(ctx context.Context) (Timeline, error) {
 	}
 
 	eras, err := srv.Spreadsheets.Values.Get(
-		"1DZn7t_IUv-voWdRwPwOKtu7tsJAw4wVjG2bKVA7skQQ",
+		os.Getenv("SPREADSHEET_ID"),
 		"eras!A2:C",
 	).Do()
 	if err != nil {

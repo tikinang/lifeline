@@ -5,10 +5,10 @@
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 </head>
 <body>
+<div id="timeline-embed"></div>
 <form method="post">
     <input type="submit" value="Refresh">
 </form>
-<div id="timeline-embed"></div>
 <script type="text/javascript">
     const data = JSON.parse({{ .Timeline }})
     const options = {
