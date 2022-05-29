@@ -1,8 +1,7 @@
 <html lang="en">
 <head>
     <title>Tikinang's lifeline</title>
-    <link title="timeline-styles" rel="stylesheet"
-          href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+    <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
 </head>
 <body>

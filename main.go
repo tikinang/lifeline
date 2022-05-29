@@ -174,11 +174,7 @@ func fetch(ctx context.Context) (Timeline, error) {
 		return Timeline{}, fmt.Errorf("GOOGLE_JSON_CREDENTIALS not found")
 	}
 
-	srv, err := sheets.NewService(
-		ctx,
-		//option.WithScopes(sheets.SpreadsheetsReadonlyScope),
-		option.WithCredentials(creds),
-	)
+	srv, err := sheets.NewService(ctx, option.WithCredentials(creds))
 	if err != nil {
 		return Timeline{}, err
 	}
@@ -236,7 +232,7 @@ func fetch(ctx context.Context) (Timeline, error) {
 
 	eras, err := srv.Spreadsheets.Values.Get(
 		"1DZn7t_IUv-voWdRwPwOKtu7tsJAw4wVjG2bKVA7skQQ",
-		"eras!A2:D",
+		"eras!A2:C",
 	).Do()
 	if err != nil {
 		return Timeline{}, err
