@@ -117,7 +117,7 @@ func (h *handler) handlePost(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "fetch error: %v", err)
 		return
 	}
-	h.handleGet(w, r)
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
 
 type storage struct {
@@ -190,9 +190,14 @@ func fetch(ctx context.Context) (Timeline, error) {
 
 		var e Event
 		if start, ok := line[fieldStart].(string); ok && start != "" {
-			startTime, err := time.Parse("2006-1", start)
-			if err != nil {
-				return Timeline{}, fmt.Errorf("line %d: error parsing start date: %v", lineIndex, err)
+			var startTime time.Time
+			if start == "now" {
+				startTime = time.Now()
+			} else {
+				startTime, err = time.Parse("2006-1", start)
+				if err != nil {
+					return Timeline{}, fmt.Errorf("line %d: error parsing start date: %v", lineIndex, err)
+				}
 			}
 			e.Start = Date{
 				Year:  startTime.Year(),
@@ -202,9 +207,14 @@ func fetch(ctx context.Context) (Timeline, error) {
 			return Timeline{}, fmt.Errorf("line %d: start date missing or corrupt", lineIndex)
 		}
 		if end, ok := line[fieldEnd].(string); ok && end != "" {
-			endTime, err := time.Parse("2006-1", end)
-			if err != nil {
-				return Timeline{}, fmt.Errorf("line %d: error parsing end date: %v", lineIndex, err)
+			var endTime time.Time
+			if end == "now" {
+				endTime = time.Now()
+			} else {
+				endTime, err = time.Parse("2006-1", end)
+				if err != nil {
+					return Timeline{}, fmt.Errorf("line %d: error parsing end date: %v", lineIndex, err)
+				}
 			}
 			e.End = &Date{
 				Year:  endTime.Year(),
@@ -238,9 +248,14 @@ func fetch(ctx context.Context) (Timeline, error) {
 
 		var e Era
 		if start, ok := line[fieldStart].(string); ok && start != "" {
-			startTime, err := time.Parse("2006-1", start)
-			if err != nil {
-				return Timeline{}, fmt.Errorf("line %d: error parsing start date: %v", lineIndex, err)
+			var startTime time.Time
+			if start == "now" {
+				startTime = time.Now()
+			} else {
+				startTime, err = time.Parse("2006-1", start)
+				if err != nil {
+					return Timeline{}, fmt.Errorf("line %d: error parsing start date: %v", lineIndex, err)
+				}
 			}
 			e.Start = Date{
 				Year:  startTime.Year(),
@@ -250,9 +265,14 @@ func fetch(ctx context.Context) (Timeline, error) {
 			return Timeline{}, fmt.Errorf("line %d: start date missing or corrupt", lineIndex)
 		}
 		if end, ok := line[fieldEnd].(string); ok && end != "" {
-			endTime, err := time.Parse("2006-1", end)
-			if err != nil {
-				return Timeline{}, fmt.Errorf("line %d: error parsing end date: %v", lineIndex, err)
+			var endTime time.Time
+			if end == "now" {
+				endTime = time.Now()
+			} else {
+				endTime, err = time.Parse("2006-1", end)
+				if err != nil {
+					return Timeline{}, fmt.Errorf("line %d: error parsing end date: %v", lineIndex, err)
+				}
 			}
 			e.End = Date{
 				Year:  endTime.Year(),

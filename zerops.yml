@@ -1,9 +1,10 @@
 lifeline:
   build:
-    base: [ go@1 ]
+    base:
+      - go@1
     build:
-      - export GOMODCACHE="/build/source/mod" && go build -o lifeline-server main.go
-    deploy: [ lifeline-server ]
-    cache: [ mod ]
+      - go build -o lifeline-server main.go
+    deploy:
+      - lifeline-server
   run:
     start: ./lifeline-server
